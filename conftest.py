@@ -1,3 +1,4 @@
+import os
 import pytest
 from playwright.sync_api import sync_playwright
 from utils.utils_config import CONFIG
@@ -14,9 +15,10 @@ def page():
         context = browser.new_context(
             base_url=CONFIG["base_url"],
             viewport={"width": 1280, "height": 720},
-            storage_state="state.json"  # Load the saved state from the JSON file
+            # storage_state="state.json"  # Load the saved state from the JSON file
         )
         page = context.new_page()
+        page.goto("/")
         page.set_default_timeout(CONFIG["timeout"])
 
         yield page
@@ -29,9 +31,10 @@ def page():
 def logged_page(page):
     login = LoginPage(page)
 
-    login.open()
-    login.login(CONFIG["username"], CONFIG["password"])
-    expect(page.locator(LoginLocators.SUCCESS_INDICATOR)).to_be_visible(timeout=CONFIG["timeout"])
+    username = os.getenv("USERNAME")
+    password = os.getenv("PASSWORD")
 
+    login.open()
+    login.login(username, password)
 
     return page

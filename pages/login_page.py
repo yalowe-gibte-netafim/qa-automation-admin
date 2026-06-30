@@ -1,3 +1,5 @@
+import os
+
 from pages.base_page import BasePage
 from pages.locators.login_locators import LoginLocators
 from utils.utils_config import CONFIG
@@ -7,11 +9,15 @@ class LoginPage(BasePage):
         super().__init__(page)
 
     def open(self):
-        super().open("login")  # או "/login" אם יש route
+        super().open("login")
 
     def login(self, username, password):
-        self.fill(LoginLocators.USERNAME_INPUT, username)
-        self.fill(LoginLocators.PASSWORD_INPUT, password)
+        
+        if not username or not password:
+            raise ValueError("Username or Password is missing")
+
+        self.fill(LoginLocators.USERNAME_INPUT, os.getenv("USERNAME"))
+        self.fill(LoginLocators.PASSWORD_INPUT, os.getenv("PASSWORD"))
         self.click(LoginLocators.LOGIN_BUTTON)
 
     # def is_logged_in(self):

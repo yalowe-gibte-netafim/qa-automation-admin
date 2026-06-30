@@ -23,10 +23,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest playwright pytest-xdist
 
-      - name: Install Playwright browsers
+      - name: Install browsers
         run: |
-          playwright install
+          playwright install --with-deps
 
       - name: Run tests
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           pytest -n auto
