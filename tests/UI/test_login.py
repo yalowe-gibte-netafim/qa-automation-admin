@@ -13,8 +13,8 @@ def test_login(page):
     username = os.getenv("TEST_USERNAME")
     password = os.getenv("TEST_PASSWORD")
 
-    username = os.getenv("TEST_USERNAME") or CONFIG["username"]
-    password = os.getenv("TEST_PASSWORD") or CONFIG["password"]
+    username = os.getenv("TEST_USERNAME")
+    password = os.getenv("TEST_PASSWORD")
 
     login.open()
     login.login(username, password)
