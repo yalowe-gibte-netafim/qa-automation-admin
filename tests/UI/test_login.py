@@ -16,19 +16,15 @@ def test_login(page):
     print("USERNAME from ENV:", username)
     print("PASSWORD from ENV:", password)
 
-    assert username is not None, "TEST_USERNAME NOT LOADED ❌"
-    assert password is not None, "TEST_PASSWORD NOT LOADED ❌"
+    assert username is not None, "TEST_USERNAME NOT LOADED"
+    assert password is not None, "TEST_PASSWORD NOT LOADED"
 
+    username = os.getenv("TEST_USERNAME") or CONFIG["username"]
+    password = os.getenv("TEST_PASSWORD") or CONFIG["password"]
 
-    username = os.getenv("TEST_USERNAME") or CONFIG["TEST_USERNAME"]
-    password = os.getenv("TEST_PASSWORD") or CONFIG["TEST_PASSWORD"]
-
-    
     login.open()
     login.login(username, password)
     # expect(page.locator(LoginLocators.SUCCESS_INDICATOR)).to_be_visible(timeout=CONFIG["timeout"])
-
-
 
 def test_go_to_users(logged_page):
     dashboard = DashboardPage(logged_page)

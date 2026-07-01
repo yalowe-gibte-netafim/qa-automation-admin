@@ -31,8 +31,8 @@ def page():
 def logged_page(page):
     login = LoginPage(page)
 
-    username = os.getenv("TEST_USERNAME") or CONFIG["TEST_USERNAME"]
-    password = os.getenv("TEST_PASSWORD") or CONFIG["TEST_PASSWORD"]
+    username = os.getenv("TEST_USERNAME") or CONFIG["username"]
+    password = os.getenv("TEST_PASSWORD") or CONFIG["password"]
 
     login.open()
     login.login(username, password)
