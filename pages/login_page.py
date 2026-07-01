@@ -1,25 +1,21 @@
-import os
-
 from pages.base_page import BasePage
 from pages.locators.login_locators import LoginLocators
-from utils.utils_config import CONFIG
+from playwright.sync_api import expect
+
 
 class LoginPage(BasePage):
-    def __init__(self, page):
-        super().__init__(page)
 
     def open(self):
-        super().open("login")
+        self.page.goto("/")
 
     def login(self, username, password):
-        
         if not username or not password:
             raise ValueError("Username or Password is missing")
 
-        self.fill(LoginLocators.USERNAME_INPUT, os.getenv("USERNAME"))
-        self.fill(LoginLocators.PASSWORD_INPUT, os.getenv("PASSWORD"))
+        self.fill(LoginLocators.USERNAME_INPUT, username)
+        self.fill(LoginLocators.PASSWORD_INPUT, password)
         self.click(LoginLocators.LOGIN_BUTTON)
 
-    # def is_logged_in(self):
-    #     print("Checking if logged in by verifying the visibility of the success indicator.")
-    #     return self.page.is_visible(LoginLocators.SUCCESS_INDICATOR)
+        # ✅ חשוב — לחכות שיצא מה-login
+        expect(self.page).not_to_have_url("**login**")
+        print(f"Logged in as {username}")

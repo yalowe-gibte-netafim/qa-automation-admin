@@ -3,3 +3,4 @@ class LoginLocators:
     PASSWORD_INPUT = 'input[name="password"]'
     LOGIN_BUTTON = 'button:has-text("Log In")'
     SUCCESS_INDICATOR = ".growsphere__icon"
+    BU_DASHBOARD_TITLE = "h1.dashboard-title"

@@ -1,3 +1,4 @@
+
 class SidebarComponent:
     def __init__(self, page):
         self.page = page
@@ -20,24 +21,30 @@ class SidebarComponent:
 
     def open_users(self):
         self.page.locator(self.USERS).click()
+        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
 
     def open_bus(self):
         self.page.locator(self.BUS).click()
-        
+        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
     def open_regions(self):
         self.page.locator(self.REGIONS).click()
+        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
 
     def open_companies(self):
         self.page.locator(self.COMPANIES).click()
+        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
 
     def open_farms(self):
         self.page.locator(self.FARMS).click()
+        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
 
     def open_crop_management(self):
         self.page.locator(self.CROP_MANAGEMENT).click()
+        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
 
     def open_device_management(self):
         self.page.locator(self.DEVICE_MANAGEMENT).click()
+        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
 
     def open_documentation(self):
         self.page.locator(self.DOCUMENTATION).click()
