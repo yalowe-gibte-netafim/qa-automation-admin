@@ -11,7 +11,7 @@ from pages.locators.login_locators import LoginLocators
 @pytest.fixture(scope="function")
 def page():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=_should_run_headless())
         context = browser.new_context(
             base_url=CONFIG["base_url"],
             viewport={"width": 1280, "height": 720},
@@ -25,6 +25,10 @@ def page():
 
         context.close()
         browser.close()
+
+
+def _should_run_headless():
+    return not (os.getenv("DISPLAY") or os.getenv("WAYLAND_DISPLAY"))
 
 
 @pytest.fixture
