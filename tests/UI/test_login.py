@@ -13,12 +13,6 @@ def test_login(page):
     username = os.getenv("TEST_USERNAME")
     password = os.getenv("TEST_PASSWORD")
 
-    print("USERNAME from ENV:", username)
-    print("PASSWORD from ENV:", password)
-
-    assert username is not None, "TEST_USERNAME NOT LOADED"
-    assert password is not None, "TEST_PASSWORD NOT LOADED"
-
     username = os.getenv("TEST_USERNAME") or CONFIG["username"]
     password = os.getenv("TEST_PASSWORD") or CONFIG["password"]
 
