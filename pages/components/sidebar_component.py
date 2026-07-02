@@ -1,7 +1,10 @@
 
-class SidebarComponent:
+from pages.base_page import BasePage
+
+
+class SidebarComponent(BasePage):
     def __init__(self, page):
-        self.page = page
+        super().__init__(page)
 
     # 🔹 Locators
     TECH_TOOLBOX = "text=Tech Toolbox"
@@ -17,37 +20,31 @@ class SidebarComponent:
 
     # 🔹 Actions
     def open_tech_toolbox(self):
-        self.page.locator(self.TECH_TOOLBOX).click()
+        self.click_on_element(self.TECH_TOOLBOX)
 
     def open_users(self):
-        self.page.locator(self.USERS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.USERS)
 
     def open_bus(self):
-        self.page.locator(self.BUS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.BUS)
+
     def open_regions(self):
-        self.page.locator(self.REGIONS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.REGIONS)
 
     def open_companies(self):
-        self.page.locator(self.COMPANIES).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.COMPANIES)
 
     def open_farms(self):
-        self.page.locator(self.FARMS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.FARMS)
 
     def open_crop_management(self):
-        self.page.locator(self.CROP_MANAGEMENT).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.CROP_MANAGEMENT)
 
     def open_device_management(self):
-        self.page.locator(self.DEVICE_MANAGEMENT).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.DEVICE_MANAGEMENT)
 
     def open_documentation(self):
-        self.page.locator(self.DOCUMENTATION).click()
+        self.click_on_element(self.DOCUMENTATION)
 
     def logout(self):
-        self.page.locator(self.LOGOUT).click()
+        self.click_on_element(self.LOGOUT)

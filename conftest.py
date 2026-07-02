@@ -1,3 +1,6 @@
+import sys
+sys.dont_write_bytecode = True
+
 import os
 import pytest
 from playwright.sync_api import sync_playwright
@@ -5,6 +8,16 @@ from utils.utils_config import CONFIG
 from pages.login_page import LoginPage
 from playwright.sync_api import expect
 from pages.locators.login_locators import LoginLocators
+
+
+from auth.auth_injector import inject_oidc_session
+from auth.access_token import (
+    ACCESS_TOKEN,
+    ID_TOKEN,
+    REFRESH_TOKEN,
+    EXPIRES_AT,
+)
+
 
 
 
@@ -26,14 +39,19 @@ def page():
         browser.close()
 
 
+
 @pytest.fixture
-def logged_page(page):
-    login = LoginPage(page)
+def api_logged_page(page):
 
-    username = os.getenv("TEST_USERNAME") or CONFIG["username"]
-    password = os.getenv("TEST_PASSWORD") or CONFIG["password"]
+    inject_oidc_session(
+        page=page,
+        access_token=ACCESS_TOKEN,
+        id_token=ID_TOKEN,
+        refresh_token=REFRESH_TOKEN,
+        expires_at=EXPIRES_AT,
+    )
 
-    login.open()
-    login.login(username, password)
+    page.goto(CONFIG["base_url"])
 
     return page
+
