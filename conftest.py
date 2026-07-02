@@ -1,13 +1,14 @@
-import os
 import sys
+
+sys.dont_write_bytecode = True
+
+import os
 import pytest
 from playwright.sync_api import sync_playwright
 from utils.utils_config import CONFIG
 from pages.login_page import LoginPage
 from playwright.sync_api import expect
 from pages.locators.login_locators import LoginLocators
-
-sys.dont_write_bytecode = True
 
 
 
