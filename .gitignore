@@ -11,6 +11,7 @@ test-results/
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # Pytest
 .pytest_cache/
@@ -21,3 +22,7 @@ venv/
 
 # IDE
 .vscode/
+
+
+.env
+data/auth_storage.json

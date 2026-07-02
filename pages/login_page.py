@@ -12,9 +12,9 @@ class LoginPage(BasePage):
         if not username or not password:
             raise ValueError("Username or Password is missing")
 
-        self.fill(LoginLocators.USERNAME_INPUT, username)
-        self.fill(LoginLocators.PASSWORD_INPUT, password)
-        self.click(LoginLocators.LOGIN_BUTTON)
+        self.fill_value(LoginLocators.USERNAME_INPUT, username)
+        self.fill_value(LoginLocators.PASSWORD_INPUT, password)
+        self.click_on_element(LoginLocators.LOGIN_BUTTON)
 
         # ✅ חשוב — לחכות שיצא מה-login
         expect(self.page).not_to_have_url("**login**")

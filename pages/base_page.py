@@ -30,7 +30,7 @@ class BasePage:
         expect(locator).to_be_visible()
         return locator.count()
     
-    def get_element_text(self, selector, text=None):
+    def get_element_text(self, selector):
         locator = self.page.locator(selector)
         expect(locator).to_be_visible()
         return locator.inner_text()
