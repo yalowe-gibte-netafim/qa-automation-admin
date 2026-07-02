@@ -6,3 +6,23 @@ state.json
 playwright-report/
 test-results/
 .pytest_cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Pytest
+.pytest_cache/
+
+# Virtual Environment
+venv/
+.venv/
+
+# IDE
+.vscode/
+
+
+.env
+data/auth_storage.json

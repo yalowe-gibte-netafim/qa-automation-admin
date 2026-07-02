@@ -1,53 +1,39 @@
 
-class SidebarComponent:
+from pages.base_page import BasePage
+from pages.components.components_locator import SidebarLocators
+
+
+class SidebarComponent(BasePage):
     def __init__(self, page):
-        self.page = page
+        super().__init__(page)
+        self.SidebarLocators = SidebarLocators
 
-    # 🔹 Locators
-    TECH_TOOLBOX = "text=Tech Toolbox"
-    USERS = "text=Users"
-    BUS = "text=BU's"
-    REGIONS = "text=Regions"
-    COMPANIES = "text=Companies"
-    FARMS = "text=Farms"
-    CROP_MANAGEMENT = "text=Crop management"
-    DEVICE_MANAGEMENT = "text=Device management"
-    DOCUMENTATION = "text=Documentation"
-    LOGOUT = "text=Logout"
-
-    # 🔹 Actions
     def open_tech_toolbox(self):
-        self.page.locator(self.TECH_TOOLBOX).click()
+        self.click_on_element(self.SidebarLocators.TECH_TOOLBOX)
 
     def open_users(self):
-        self.page.locator(self.USERS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.SidebarLocators.USERS)
 
     def open_bus(self):
-        self.page.locator(self.BUS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.SidebarLocators.BUS)
+
     def open_regions(self):
-        self.page.locator(self.REGIONS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.SidebarLocators.REGIONS)
 
     def open_companies(self):
-        self.page.locator(self.COMPANIES).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.SidebarLocators.COMPANIES)
 
     def open_farms(self):
-        self.page.locator(self.FARMS).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.SidebarLocators.FARMS)
 
     def open_crop_management(self):
-        self.page.locator(self.CROP_MANAGEMENT).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.SidebarLocators.CROP_MANAGEMENT)
 
     def open_device_management(self):
-        self.page.locator(self.DEVICE_MANAGEMENT).click()
-        self.page.wait_for_timeout(1000)  # Wait for 1 second to ensure the page has loaded
+        self.click_on_element(self.SidebarLocators.DEVICE_MANAGEMENT)
 
     def open_documentation(self):
-        self.page.locator(self.DOCUMENTATION).click()
+        self.click_on_element(self.SidebarLocators.DOCUMENTATION)
 
     def logout(self):
-        self.page.locator(self.LOGOUT).click()
+        self.click_on_element(self.SidebarLocators.LOGOUT)

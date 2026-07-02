@@ -1,10 +1,16 @@
+import sys
 import os
+sys.dont_write_bytecode = True
+
+from auth.token_manager import TokenManager
+
+
 import pytest
 from playwright.sync_api import sync_playwright
 from utils.utils_config import CONFIG
 from pages.login_page import LoginPage
-from playwright.sync_api import expect
-from pages.locators.login_locators import LoginLocators
+from auth.auth_injector import inject_storage
+
 
 
 
@@ -26,14 +32,50 @@ def page():
         browser.close()
 
 
+
 @pytest.fixture
-def logged_page(page):
-    login = LoginPage(page)
+def api_logged_page(page):
+    print("API Logged Page Fixture: Checking token validity...")
 
-    username = os.getenv("TEST_USERNAME") or CONFIG["username"]
-    password = os.getenv("TEST_PASSWORD") or CONFIG["password"]
+    
+    is_valid = TokenManager.is_token_valid()
 
-    login.open()
-    login.login(username, password)
+    if is_valid:
+
+        print("Token is valid - using saved session")
+
+
+    if TokenManager.is_token_valid():
+
+        print("Using saved session")
+        storage = TokenManager.load_storage()
+
+        inject_storage(page, storage)
+
+        page.goto(CONFIG["base_url"])
+
+    else:
+
+        print("Performing UI login")
+
+        login = LoginPage(page)
+
+        login.open()
+
+        login.login(
+            CONFIG["username"],
+            CONFIG["password"]
+        )
+        
+        
+        page.wait_for_load_state("networkidle")
+        page.wait_for_timeout(3000)
+        print("URL BEFORE SAVE:", page.url)
+
+        storage = TokenManager.get_local_storage(page)
+        print("Storage after login:", storage)
+
+        TokenManager.save_storage(storage)
+        print("Storage keys after save:", storage.keys())
 
     return page

@@ -5,6 +5,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 def get_env():
+
     return os.getenv("ENV", "qa")
 
 def load_config():
