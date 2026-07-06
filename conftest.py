@@ -3,14 +3,12 @@ import os
 sys.dont_write_bytecode = True
 
 from auth.token_manager import TokenManager
-
-
 import pytest
 from playwright.sync_api import sync_playwright
 from utils.utils_config import CONFIG
 from pages.login_page import LoginPage
 from auth.auth_injector import inject_storage
-
+import allure
 
 
 
@@ -79,3 +77,23 @@ def api_logged_page(page):
         print("Storage keys after save:", storage.keys())
 
     return page
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item):
+
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+
+        page = item.funcargs.get("api_logged_page")
+
+        if page:
+
+            screenshot = page.screenshot()
+
+            allure.attach(
+                screenshot,name="Failure Screenshot",
+                attachment_type=allure.attachment_type.PNG
+            )

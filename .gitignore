@@ -26,3 +26,6 @@ venv/
 
 .env
 data/auth_storage.json
+
+reports/allure-results/
+reports/allure-report/
