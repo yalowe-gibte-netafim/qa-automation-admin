@@ -29,3 +29,7 @@ data/auth_storage.json
 
 reports/allure-results/
 reports/allure-report/
+
+allure-results/
+allure-report/
+

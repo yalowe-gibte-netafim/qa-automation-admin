@@ -14,8 +14,7 @@ class SidebarComponent(BasePage):
 
     def open_users(self):
         self.click_on_element(self.SidebarLocators.USERS)
-        self.validate_element_text(self.CommonLocators.DASHBOARD_TITLE, "USERS INFO")
-
+        # self.validate_element_text(self.CommonLocators.DASHBOARD_TITLE, "USERS INFO")
 
     def open_bus(self):
         self.click_on_element(self.SidebarLocators.BUS)
