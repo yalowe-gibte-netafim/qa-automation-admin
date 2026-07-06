@@ -1,7 +1,5 @@
 
 {
   "base_url": "https://qa1netbeatvxadminst.z6.web.core.windows.net",
-  "timeout": 30000,
-  "username": "yalowe.gibte@netafim.com",
-  "password": "Aa123456"
+  "timeout": 30000
 }

@@ -28,31 +28,43 @@ class TokenManager:
         
     @classmethod
     def save_storage(cls, storage_data):
+        cls.STORAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
         with open(cls.STORAGE_FILE, "w", encoding="utf-8") as f:
             json.dump(storage_data, f, ensure_ascii=False, indent=4)
     
     @classmethod
     def is_token_valid(cls):
         print("Checking token validity...")
+
         storage_data = cls.load_storage()
+
         if not storage_data:
             print("Storage file not found")
             return False
         
         token = storage_data.get("access_token")
+
         if not token:
             print("Access token not found")
             return False
 
         try:
             claims = jwt.decode(token, options={"verify_signature": False})
-            valid = time.time() < claims["exp"]
-            print(f"Token valid: {valid}")
+            exp = claims.get("exp")
+
+            if not exp:
+                print("Token expiration claim not found")
+                return False
+            
+            valid = exp > time.time()
+            print(f"Token is valid")
+    
             return valid
         
         except Exception as e:
             print(f"Error decoding token: {e}")
             return False
+            
         
 
     @classmethod
